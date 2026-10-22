@@ -1,0 +1,231 @@
+/* ORBIT — Design tokens (menus DOM + HUD canvas).
+   Le HUD canvas lit ces variables au démarrage via getComputedStyle(document.documentElement).
+   Règle absolue : --c-danger (rouge) est réservé aux dangers. Aucun autre token n'est rouge/rose/orange.
+   Aucune ressource externe : polices système uniquement. */
+
+:root {
+  /* ---------- Fonds (encre) ---------- */
+  --c-bg-0: #03050B;          /* fond page, theme_color, background_color */
+  --c-bg-1: #080C1A;          /* panneaux, pastilles du HUD */
+  --c-bg-2: #0F1630;          /* cartes, boutons secondaires */
+  --c-bg-3: #1A2447;          /* pressé, pistes de barres, pastilles vides */
+  --c-scrim: rgba(3, 5, 11, 0.80);
+  --c-line: #9DB4E8;          /* instrument : orbites, lunette (toujours avec alpha) */
+  --c-line-soft: rgba(157, 180, 232, 0.18);
+  --c-line-strong: rgba(157, 180, 232, 0.38);
+
+  /* ---------- Lumière (joueur, bonus) ---------- */
+  --c-astre: #FFFFFF;         /* cœur du joueur UNIQUEMENT */
+  --c-ivoire: #FFF1CC;        /* halo/sillage joueur, bouton principal */
+  --c-or: #FFD45C;            /* Photons, records, étoiles, badges, mult >= x4 */
+  --c-menthe: #5CFFB0;        /* Résonances, réclamable, succès */
+
+  /* ---------- Danger (exclusif) ---------- */
+  --c-danger: #FF2E4D;
+  --c-danger-chaud: #FFB8C4;  /* âme des faisceaux/arcs */
+  --c-danger-sombre: #5A0A1C; /* remplissage des télégraphes de corps */
+
+  /* ---------- Noyaux ---------- */
+  --c-atlas: #5FA8FF;   --c-atlas-accent: #BFD9FF;   --c-atlas-bg: #123A7A;
+  --c-vesta: #A77BFF;   --c-vesta-accent: #D9C6FF;   --c-vesta-bg: #3A1E7A;
+  --c-kepler: #3EE0C8;  --c-kepler-accent: #B5FFF2;  --c-kepler-bg: #0E4D52;
+  --c-selene: #C9D6FF;  --c-selene-accent: #FFFFFF;  --c-selene-bg: #2A3352;
+  --c-nyx: #6A5CFF;     --c-nyx-accent: #9A8CFF;     --c-nyx-bg: #1A1452;
+  --c-zenith: #7FB2FF;  /* valeur de repli ; en jeu : cycle HSL 190°→290° */
+
+  /* ---------- Multiplicateur ---------- */
+  --c-mult-1: #5A6488;
+  --c-mult-2: #BFD4FF;
+  --c-mult-3: #5CFFB0;
+  --c-mult-4: #FFD45C;
+  --c-mult-5: #FFD45C;
+  --c-mult-6: #FFF1CC;
+  --c-mult-8: #FFFFFF;
+
+  /* ---------- Texte ---------- */
+  --c-text-hi: #EEF2FF;
+  --c-text-mid: #A3AECF;
+  --c-text-lo: #5A6488;
+  --c-text-on-light: #03050B; /* texte sur bouton ivoire/or/menthe plein */
+
+  /* ---------- Typo (système) ---------- */
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-num: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Roboto Mono", monospace;
+  --fs-xs: 10px;
+  --fs-sm: 13px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 28px;
+  --fs-xxl: 40px;
+  --fs-chrono-end: 56px;
+  --fs-title: 52px;
+  --fw-regular: 500;
+  --fw-bold: 800;
+  --ls-caps: 0.14em;
+  --ls-title: 0.40em;
+  --ls-banner: 0.30em;
+
+  /* ---------- Espacement / formes ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 20px;
+  --radius-pill: 999px;
+  --border-w: 1.5px;
+
+  /* ---------- Cibles tactiles ---------- */
+  --tap-min: 48px;
+  --btn-h: 56px;
+  --btn-primary-h: 68px;
+  --btn-icon: 48px;
+  --slot-size: 72px;
+
+  /* ---------- Safe areas ---------- */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --gutter: 16px;
+
+  /* ---------- Glow DOM (jamais dans le canvas) ---------- */
+  --glow-ivoire: 0 0 6px rgba(255, 241, 204, 0.75), 0 0 20px rgba(255, 241, 204, 0.35);
+  --glow-or: 0 0 6px rgba(255, 212, 92, 0.85), 0 0 18px rgba(255, 212, 92, 0.40);
+  --glow-menthe: 0 0 6px rgba(92, 255, 176, 0.85), 0 0 18px rgba(92, 255, 176, 0.40);
+  --glow-line: 0 0 8px rgba(157, 180, 232, 0.45);
+  --text-glow-ivoire: 0 0 4px rgba(255, 241, 204, 0.9), 0 0 16px rgba(255, 241, 204, 0.45);
+  --text-glow-or: 0 0 4px rgba(255, 212, 92, 0.9), 0 0 14px rgba(255, 212, 92, 0.5);
+
+  /* ---------- Mouvement ---------- */
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+  --dur-slow: 400ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --press-scale: 0.95;
+
+  /* ---------- Couches ---------- */
+  --z-canvas: 0;
+  --z-hud: 10;
+  --z-menu: 20;
+  --z-overlay: 30;
+  --z-toast: 40;
+
+  /* ---------- HUD (lu par le canvas, en px CSS) ---------- */
+  --hud-margin: 12px;
+  --hud-top-h: 92px;          /* hauteur du HUD haut (hors safe-top) */
+  --hud-bottom-h: 44px;       /* hauteur du HUD bas (hors safe-bottom) */
+  --hud-chrono-size: 32px;
+  --hud-score-size: 16px;
+  --hud-mult-size: 22px;
+  --hud-label-size: 10px;
+  --hud-pip: 6px;
+  --hud-panel-alpha: 0.72;
+  --hud-alpha: 0.95;
+
+  /* ---------- Gameplay (référence, en u — la sim a ses propres constantes) ---------- */
+  --u-r-core: 30;
+  --u-r-int: 92;
+  --u-r-ext: 138;
+  --u-r-bezel: 168;
+  --u-r-edge: 178;
+  --hold-ms: 140;
+
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+    --press-scale: 1;
+  }
+}
+:root[data-reduced-motion="true"] {
+  --dur-fast: 0ms;
+  --dur-med: 0ms;
+  --dur-slow: 0ms;
+  --press-scale: 1;
+}
+
+/* ---------- Base minimale ---------- */
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--c-bg-0);
+  color: var(--c-text-hi);
+  font-family: var(--font-ui);
+  font-weight: var(--fw-regular);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;   /* pas de menu sur appui long iOS */
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.caps { text-transform: uppercase; letter-spacing: var(--ls-caps); }
+
+.btn {
+  min-height: var(--btn-h);
+  min-width: var(--tap-min);
+  padding: 0 var(--sp-5);
+  border-radius: var(--radius-m);
+  border: var(--border-w) solid var(--c-line-strong);
+  background: var(--c-bg-2);
+  color: var(--c-text-hi);
+  font: var(--fw-bold) var(--fs-md)/1 var(--font-ui);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-med);
+}
+.btn:active { transform: scale(var(--press-scale)); background: var(--c-bg-3); }
+.btn--primary {
+  min-height: var(--btn-primary-h);
+  background: var(--c-ivoire);
+  border-color: var(--c-ivoire);
+  color: var(--c-text-on-light);
+  box-shadow: var(--glow-ivoire);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--ls-banner);
+}
+.btn--buy {
+  background: transparent;
+  border-color: var(--c-or);
+  color: var(--c-or);
+  box-shadow: var(--glow-or);
+}
+.btn--claim {
+  background: var(--c-menthe);
+  border-color: var(--c-menthe);
+  color: var(--c-text-on-light);
+  box-shadow: var(--glow-menthe);
+}
+.btn[disabled] { opacity: 0.4; box-shadow: none; }
+
+/* REJOUER : se remplit pendant les 0,9 s de verrouillage après la mort */
+.btn--primary.is-arming {
+  background: linear-gradient(90deg, var(--c-ivoire) var(--arm, 0%), var(--c-bg-2) var(--arm, 0%));
+  color: var(--c-text-hi);
+  box-shadow: none;
+}
+
+.badge-alert {               /* or, jamais rouge */
+  min-width: 18px; height: 18px; border-radius: var(--radius-pill);
+  background: var(--c-or); color: var(--c-text-on-light);
+  font: var(--fw-bold) var(--fs-xs)/18px var(--font-ui); text-align: center;
+}
+.panel {
+  background: var(--c-bg-1);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-l);
+}
+.danger-glyph { color: var(--c-danger); } /* uniquement : cause de la mort sur l'écran de fin */
